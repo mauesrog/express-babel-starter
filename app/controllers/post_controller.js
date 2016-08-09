@@ -34,7 +34,7 @@ export const getPosts = (req, res) => {
     Post.find()
     .then(result => {
       try {
-        res.json({ data: cleanPosts(result) });
+        res.json(cleanPosts(result));
       } catch (err) {
         res.json({ error: `${err}` });
       }
@@ -54,7 +54,7 @@ export const getPost = (req, res) => {
         const data = cleanPosts([result])[0];
         data.content = result.content;
 
-        res.json({ data });
+        res.json(data);
       } catch (err) {
         res.json({ error: `${err}` });
       }
