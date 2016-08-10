@@ -10,12 +10,14 @@ export const createPost = (req, res) => {
   try {
     const post = new Post();
 
-    if (!(req.body.title && req.body.tags && req.body.content) || Object.keys(req.body).length > 3) {
+    if (typeof req.body.title === 'undefined' || typeof req.body.tags === 'undefined' || typeof req.body.content === 'undefined') {
       res.json({
         error: 'ERR: Posts need \'title\', \'tags\', and \'content\' fields',
       });
     } else {
-      Object.assign(post, req.body);
+      post.title = req.body.title;
+      post.tags = req.body.tags.length ? req.body.tags.split(' ') : [];
+      post.content = req.body.content;
 
       post.save()
       .then(result => {
@@ -93,7 +95,13 @@ export const deletePost = (req, res) => {
 };
 export const updatePost = (req, res) => {
   try {
-    Post.update({ _id: req.params.id }, req.body)
+    const body = req.body;
+
+    if (typeof body.tags !== 'undefined') {
+      body.tags = body.tags.length ? body.tags.split(' ') : ['bye'];
+    }
+
+    Post.update({ _id: req.params.id }, body)
     .then(result => {
       try {
         const status = {};
