@@ -98,7 +98,7 @@ export const updatePost = (req, res) => {
     const body = req.body;
 
     if (typeof body.tags !== 'undefined') {
-      body.tags = body.tags.length ? body.tags.split(' ') : ['bye'];
+      body.tags = body.tags.length ? body.tags.split(' ') : [];
     }
 
     Post.update({ _id: req.params.id }, body)
