@@ -10,6 +10,8 @@ export const createPost = (req, res) => {
   try {
     const post = new Post();
 
+    console.log(req.body);
+
     if (typeof req.body.title === 'undefined' || typeof req.body.tags === 'undefined' || typeof req.body.content === 'undefined') {
       res.json({
         error: 'ERR: Posts need \'title\', \'tags\', and \'content\' fields',

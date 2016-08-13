@@ -1,5 +1,3 @@
-mkdir -p "app/controllers"
-cat
 import Post from '../models/post_model';
 
 export const createPost = (req, res) => {

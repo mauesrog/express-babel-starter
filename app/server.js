@@ -3,11 +3,6 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import apiRouter from './router';
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-console.log(process.env.API_SECRET);
 
 
 // DB Setup
