@@ -18,9 +18,8 @@ export const signin = (req, res) => {
       });
     } else {
       const token = tokenForUser(req.user);
-      res.json({ token });
+      res.json({ token, email: req.user.email });
     }
-
   } catch (err) {
     res.json({ error: `${err}` });
   }
@@ -42,7 +41,7 @@ export const signup = (req, res) => {
       user.save()
       .then(result => {
         const token = tokenForUser(result);
-        res.json({ token });
+        res.json({ token, email: req.user.email });
       })
       .catch(error => {
         res.json({ error });
