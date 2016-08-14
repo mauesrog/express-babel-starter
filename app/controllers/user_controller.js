@@ -38,10 +38,16 @@ export const signup = (req, res) => {
       user.email = req.body.email;
       user.password = req.body.password;
 
+      console.log(user);
+
       user.save()
       .then(result => {
-        const token = tokenForUser(result);
-        res.json({ token, email: req.user.email });
+        try {
+          const token = tokenForUser(result);
+          res.json({ token, email: result.email });
+        } catch (err) {
+          res.json({ error: `${err}` });
+        }
       })
       .catch(error => {
         res.json({ error });
